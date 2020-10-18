@@ -1,110 +1,111 @@
-// Assignment Code
+// Assignment Code.
 var generateBtn = document.querySelector("#generate");
 
-// parameter is userInput, we are checking that the criteria is being met, if it is not, it returns false,  on line 16, outside of if statement,
-//  it's outside because if the user input is CORRECT, it doesn't go inside of the if statement, it'll return true. 
-var passwordValidation = (userInput) =>  {
-  if (userInput === null) { 
+// Created a function named passwordValidation to check if the parameter userInput after the prompt is true. If not it returns false and the user will have to try again.
+// The return true value is outside of the if else statements because if the user input is true it does not need to go inside the if else statements. 
+var passwordValidation = (userInput) => {
+  if (userInput === null) {
     alert('You pressed cancel. Please try again')
     return false;
-  }else if (userInput < 8 || userInput > 128) {
+  } else if (userInput < 8 || userInput > 128) {
     alert('Please try again. Your password must be between 8 and 128 numerical characters long')
     return false;
   } else if (isNaN(userInput)) {
     alert('Please enter a valid number input')
     return false;
-  } 
-   return true;
+  }
+  return true;
 };
 
 
-//  variables for selection for generating the random password
+// Variables section that contain arrays with all the characters needed.
 let lowCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 let upCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-let numCase = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+let numCase = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,];
 let specCase = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~"];
 
+// Created a function named userConfirmationInput that passes passwordLength as a parameter.
 var userConfirmationInput = (passwordLength) => {
-  // initialize empty array to store password, check line 42. password.push stores the password here
-  // check scope, password array is in function, but not inside for loops or if statements so that it can be accessed anywhere inside of the function. 
-  
+
+  // Initialized an empty array to store the password, passwordArray.push located under the for loop stores the password here.
+  // Check scope, passwordArray is in a function, but not inside for loops or if statements so that it can be accessed anywhere inside of the function. 
   let passwordArray = [];
 
-  // these below check for if the input is true or not, when the user selects yes or no.
+  // These below check for if the input is true or not, when the user selects yes or no from the confirms.
   let isLow = confirm("Would you like to include lower case letters?");
   let isUp = confirm('Would you like to include upper case letters?');
   let isNum = confirm('Would you like to include numbers?');
   let isSpec = confirm('Would you like to include special characters?');
 
-  // change the name, initialzing another empty array like we're doing with password. reason why is for line 43, if array is inside of if statement, it cannot be accessed.
-  let usersArray = []
+  // Initialzed another empty array like we're doing with password. Reason why is if the array is inside of the if statement, it cannot be accessed due to scope.
+  let randomSelectionArray = []
 
   // If no option is selected
   if (!isLow && !isUp && !isNum && !isSpec) {
     alert('You must select at least one option')
     return false;
-  
-  // purpose of array is for storage of letters or special characters. 
-  // line below will do a check for what options have been selected.
+
+    // The purpose of an empty array is for the storage of letters, numbers or special characters. 
+    // The lines below will do a check for what options have been selected.
   } else if (isLow && isUp && isNum && isSpec) {
-// this line below will add the array of lowCase and upCase to the usersArray. 
-// concat will add the users selected arrays to the usersArray
-    usersArray = usersArray.concat(lowCase, upCase, numCase, specCase)
-    console.log(usersArray);
+    // This line below will add the array of lowCase, upCase, numCase and specCase to the randomSelectionArray. 
+    // Concat will join and add the users selected arrays to the randomSelectionArray.
+    randomSelectionArray = randomSelectionArray.concat(lowCase, upCase, numCase, specCase)
+    console.log(randomSelectionArray);
 
-    //Three options true
+    //Three options true.
   } else if (isLow && isUp && isNum) {
-    usersArray = usersArray.concat(lowCase, upCase, numCase);
+    randomSelectionArray = randomSelectionArray.concat(lowCase, upCase, numCase);
   } else if (isLow && isUp && isSpec) {
-    usersArray = usersArray.concat(lowCase, upCase, specCase);
+    randomSelectionArray = randomSelectionArray.concat(lowCase, upCase, specCase);
   } else if (isLow && isNum && isSpec) {
-    usersArray = usersArray.concat(lowCase, numCase, specCase);
+    randomSelectionArray = randomSelectionArray.concat(lowCase, numCase, specCase);
   } else if (isUp && isNum && isSpec) {
-    usersArray = usersArray.concat(upCase, numCase, specCase);
-  
+    randomSelectionArray = randomSelectionArray.concat(upCase, numCase, specCase);
 
-    //Two options true
+
+    //Two options true.
   } else if (isLow && isUp) {
-    usersArray = usersArray.concat(lowCase, upCase);
+    randomSelectionArray = randomSelectionArray.concat(lowCase, upCase);
   } else if (isLow && isNum) {
-    usersArray = usersArray.concat(lowCase, numCase);
+    randomSelectionArray = randomSelectionArray.concat(lowCase, numCase);
   } else if (isLow && isSpec) {
-    usersArray = usersArray.concat(lowCase, specCase);
+    randomSelectionArray = randomSelectionArray.concat(lowCase, specCase);
   } else if (isUp && isSpec) {
-    usersArray = usersArray.concat(upCase, specCase);
+    randomSelectionArray = randomSelectionArray.concat(upCase, specCase);
   } else if (isUp && isSpec) {
-    usersArray = usersArray.concat(upCase, specCase);
+    randomSelectionArray = randomSelectionArray.concat(upCase, specCase);
   } else if (isNum && isSpec) {
-    usersArray = usersArray.concat(numCase, specCase);
+    randomSelectionArray = randomSelectionArray.concat(numCase, specCase);
 
 
-    //One option true
+    //One option true.
   } else if (isLow) {
-    usersArray = usersArray.concat(lowCase);
+    randomSelectionArray = randomSelectionArray.concat(lowCase);
   } else if (isUp) {
-    usersArray = usersArray.concat(upCase);
+    randomSelectionArray = randomSelectionArray.concat(upCase);
   } else if (isNum) {
-    usersArray = usersArray.concat(numCase);
+    randomSelectionArray = randomSelectionArray.concat(numCase);
   } else if (isSpec) {
-    usersArray = usersArray.concat(specCase);
+    randomSelectionArray = randomSelectionArray.concat(specCase);
   }
 
-  // for loop below will be based on the length that the user wants the password to be. 
-  for (var i = 0; i < passwordLength; i++ ){
-    // randomCharacter stores the output of the functions below, 
-    let randomCharacter = Math.floor(Math.random() * usersArray.length);
-    // this will randomly select X amount of times (what password Length is) the position of the randomCharacter in the usersArray
-    // password.push will add the position of randomCharacter in the usersArray to the password array
-    passwordArray.push(usersArray[randomCharacter] )
+  // For loop below will be based on the length that the user wants the password to be. 
+  for (var i = 0; i < passwordLength; i++) {
+    // RandomCharacter is the variavle that stores the output of the functions below.
+    let randomCharacter = Math.floor(Math.random() * randomSelectionArray.length);
+    // This will randomly select X amount of times (what password Length is) the position of the randomCharacter in the randomSelectionArray.
+    // passwordArray.push will add the position of randomCharacter in the randomSelectionArray to the passwordArray.
+    passwordArray.push(randomSelectionArray[randomCharacter])
   }
-  // code below remove commas and quotation marks.
+  // Code below remove commas and quotation marks.
   return passwordArray.join("");
 }
 
 
 var generatePassword = () => {
-  var passwordLength = prompt('Please choose a password between 8 and 128 characters')
-  // passwordValidation returns true or false, so if it is true on line 66, it will return the values of userConfirmationInput. which is the password.
+  var passwordLength = prompt('Please enter a numerical password length that is between 8 and 128 characters long')
+  // PasswordValidation returns true or false, so if it is true, it will return the values of userConfirmationInput. which is the password.
   if (passwordValidation(passwordLength)) {
     return (userConfirmationInput(passwordLength))
   } else {
@@ -115,9 +116,9 @@ var generatePassword = () => {
 // Write password to the #password input
 const writePassword = () => {
 
-// on line 54, the function userConfirmationInputs returns passwordArray.join(" ") which is just our string. Password.join removes the quotes and the commas,
-// Then on line 59, we are returning the value of the function userConfirmationInputs, which is what is in on line 56. 
-// Line 79 will assign the value of generate passwrod to password, which on line 82 is being assigned to the component passwordText
+  // The function userConfirmationInput returns passwordArray.join(" ") which is just our string. passwordArray.join removes the quotes and the commas.
+  // Then in the generatePassword function, we are returning the value of the function userConfirmationInput. 
+  // Variable password will assign the value of generatePassword to password, which is being assigned to the component passwordText.
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
