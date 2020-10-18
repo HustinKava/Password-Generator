@@ -5,23 +5,24 @@ var generateBtn = document.querySelector("#generate");
 //  it's outside because if the user input is CORRECT, it doesn't go inside of the if statement, it'll return true. 
 var passwordValidation = (userInput) =>  {
   if (userInput === null) { 
-    alert('Please try again, cancel button pressed.')
+    alert('You pressed cancel. Please try again')
     return false;
   }else if (userInput < 8 || userInput > 128) {
-    alert('password must be within 8 and 128 characters')
+    alert('Please try again. Your password must be between 8 and 128 numerical characters long')
     return false;
   } else if (isNaN(userInput)) {
-    alert('Password must be a number')
+    alert('Please enter a valid number input')
     return false;
   } 
    return true;
-
-}
+};
 
 
 //  variables for selection for generating the random password
-let lowercaseLetters = ["a", "b", "c", "d", "e", '...']
-let uppercaseLetters = ["A", "B" ,"C" , "D", "E", "..."]
+let lowCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+let upCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+let numCase = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+let specCase = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~"];
 
 var userConfirmationInput = (passwordLength) => {
   // initialize empty array to store password, check line 42. password.push stores the password here
@@ -30,21 +31,62 @@ var userConfirmationInput = (passwordLength) => {
   let passwordArray = [];
 
   // these below check for if the input is true or not, when the user selects yes or no.
-  let includeLowerCaseLetters = confirm("Would you like to include lower case letters?");
-  let includeUpperCaseLetters = confirm('Would you like to include upper case letters?');
-  let includeNumber = confirm('Would you like to include numbers?');
-  let includeSpecialCharacters = confirm('Would you like to include special characters?');
+  let isLow = confirm("Would you like to include lower case letters?");
+  let isUp = confirm('Would you like to include upper case letters?');
+  let isNum = confirm('Would you like to include numbers?');
+  let isSpec = confirm('Would you like to include special characters?');
 
   // change the name, initialzing another empty array like we're doing with password. reason why is for line 43, if array is inside of if statement, it cannot be accessed.
   let usersArray = []
 
+  // If no option is selected
+  if (!isLow && !isUp && !isNum && !isSpec) {
+    alert('You must select at least one option')
+    return false;
+  
   // purpose of array is for storage of letters or special characters. 
   // line below will do a check for what options have been selected.
-  if (includeLowerCaseLetters && includeUpperCaseLetters) {
-// this line below will add the array of lowercaseLetters and uppercaseLetters to the usersArray. 
+  } else if (isLow && isUp && isNum && isSpec) {
+// this line below will add the array of lowCase and upCase to the usersArray. 
 // concat will add the users selected arrays to the usersArray
-    usersArray = usersArray.concat(lowercaseLetters, uppercaseLetters)
+    usersArray = usersArray.concat(lowCase, upCase, numCase, specCase)
     console.log(usersArray);
+
+    //Three options true
+  } else if (isLow && isUp && isNum) {
+    usersArray = usersArray.concat(lowCase, upCase, numCase);
+  } else if (isLow && isUp && isSpec) {
+    usersArray = usersArray.concat(lowCase, upCase, specCase);
+  } else if (isLow && isNum && isSpec) {
+    usersArray = usersArray.concat(lowCase, numCase, specCase);
+  } else if (isUp && isNum && isSpec) {
+    usersArray = usersArray.concat(upCase, numCase, specCase);
+  
+
+    //Two options true
+  } else if (isLow && isUp) {
+    usersArray = usersArray.concat(lowCase, upCase);
+  } else if (isLow && isNum) {
+    usersArray = usersArray.concat(lowCase, numCase);
+  } else if (isLow && isSpec) {
+    usersArray = usersArray.concat(lowCase, specCase);
+  } else if (isUp && isSpec) {
+    usersArray = usersArray.concat(upCase, specCase);
+  } else if (isUp && isSpec) {
+    usersArray = usersArray.concat(upCase, specCase);
+  } else if (isNum && isSpec) {
+    usersArray = usersArray.concat(numCase, specCase);
+
+
+    //One option true
+  } else if (isLow) {
+    usersArray = usersArray.concat(lowCase);
+  } else if (isUp) {
+    usersArray = usersArray.concat(upCase);
+  } else if (isNum) {
+    usersArray = usersArray.concat(numCase);
+  } else if (isSpec) {
+    usersArray = usersArray.concat(specCase);
   }
 
   // for loop below will be based on the length that the user wants the password to be. 
@@ -61,7 +103,7 @@ var userConfirmationInput = (passwordLength) => {
 
 
 var generatePassword = () => {
-  var passwordLength = prompt("Pick between 8 and 128 characters for password")
+  var passwordLength = prompt('Please choose a password between 8 and 128 characters')
   // passwordValidation returns true or false, so if it is true on line 66, it will return the values of userConfirmationInput. which is the password.
   if (passwordValidation(passwordLength)) {
     return (userConfirmationInput(passwordLength))
@@ -71,7 +113,7 @@ var generatePassword = () => {
 
 }
 // Write password to the #password input
-function writePassword() {
+const writePassword = () => {
 
 // on line 54, the function userConfirmationInputs returns passwordArray.join(" ") which is just our string. Password.join removes the quotes and the commas,
 // Then on line 59, we are returning the value of the function userConfirmationInputs, which is what is in on line 56. 
