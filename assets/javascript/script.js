@@ -43,7 +43,7 @@ var userConfirmationInput = (passwordLength) => {
   // If no option is selected
   if (!isLow && !isUp && !isNum && !isSpec) {
     alert('You must select at least one option')
-    return false;
+    return 'Please try again';
 
     // The purpose of an empty array is for the storage of letters, numbers or special characters. 
     // The lines below will do a check for what options have been selected.
@@ -100,19 +100,19 @@ var userConfirmationInput = (passwordLength) => {
   }
   // Code below remove commas and quotation marks.
   return passwordArray.join("");
-}
+};
 
 
 var generatePassword = () => {
   var passwordLength = prompt('Please enter a numerical password length that is between 8 and 128 characters long')
   // PasswordValidation returns true or false, so if it is true, it will return the values of userConfirmationInput. which is the password.
   if (passwordValidation(passwordLength)) {
-    return (userConfirmationInput(passwordLength))
+    return (userConfirmationInput(passwordLength));
   } else {
-    console.log('no')
+    console.log('no');
   }
 
-}
+};
 // Write password to the #password input
 const writePassword = () => {
 
@@ -124,7 +124,7 @@ const writePassword = () => {
 
   passwordText.value = password;
 
-}
+};
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
