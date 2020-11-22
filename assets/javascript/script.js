@@ -23,7 +23,7 @@ let lowCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
 let upCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 let numCase = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let specCase = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~"];
-
+console.log(lowCase)
 // Created a function named userConfirmationInput that passes passwordLength as a parameter.
 var userConfirmationInput = (passwordLength) => {
 
@@ -42,36 +42,51 @@ var userConfirmationInput = (passwordLength) => {
     
 
     if (isLow) {
-      randomSelectionArray = randomSelectionArray.concat(lowCase)
+      for (let i = 0; i < lowCase.length; i++) {
+        randomSelectionArray.push(lowCase[i])
+      }
+    
+     // console.log(randomSelectionArray)
     } 
 
     if (isUp) {
-      randomSelectionArray = randomSelectionArray.concat(upCase)
+      for (let i = 0; i < upCase.length; i++) {
+        randomSelectionArray.push(upCase[i])
+      }
     } 
 
     if (isNum) {
-      randomSelectionArray = randomSelectionArray.concat(numCase)
+      for (let i = 0; i < numCase.length; i++) {
+        randomSelectionArray.push(numCase[i])
+      }
     } 
 
     if (isSpec) {
-      randomSelectionArray = randomSelectionArray.concat(specCase)
+      for (let i = 0; i < specCase.length; i++) {
+        randomSelectionArray.push(specCase[i])
+      }
     } 
 
     if (!isLow && !isUp && !isNum && !isSpec) {
       alert('You must select at least one option')
     }
 
-    console.log(randomSelectionArray);
+    //console.log(randomSelectionArray);
     
   
   // For loop below will be based on the length that the user wants the password to be. 
   for (var i = 0; i < passwordLength; i++) {
     // RandomCharacter is the variable that stores the output of the functions below.
     let randomCharacter = Math.floor(Math.random() * randomSelectionArray.length);
+    console.log(randomCharacter)
     // This will randomly select X amount of times (what password Length is) the position of the randomCharacter in the randomSelectionArray.
     // passwordArray.push will add the position of randomCharacter in the randomSelectionArray to the passwordArray.
     passwordArray.push(randomSelectionArray[randomCharacter])
   }
+  console.log(passwordArray)
+  if (passwordArray) 
+
+
   // Code below remove commas and quotation marks.
   return passwordArray.join("");
 };
@@ -103,3 +118,4 @@ const writePassword = () => {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
