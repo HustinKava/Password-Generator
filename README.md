@@ -8,6 +8,10 @@
 
 <p>For this homework assignment I was tasked in creating a password generator that utilizes the power of JavaScript! </p>
 
+<h2>Technologies Used</h2>
+
+<p>For this assignment I used HTML, CSS and JavaScript</p>
+
 <h2>How it works</h2>
 
 <p>The way this password generator works is very simple. You press the "Generate Password" button and will be greeted with a prompt. The prompt will ask you for the password length in numerical characters. Depending on what the user enters, does not enter or presses will all be taken into account. 
@@ -20,8 +24,14 @@ If the user meets the password length criteria they will be met with 4 confirms 
 
 <h2>Screenshot</h2>
 
+![](/assets/images/screenshot2.PNG)
+
 ![](/assets/images/screenshot.PNG)
 
 <p>
 To view this web application please click <a href="https://hustinkava.github.io/Password-Generator/" rel="nofollow">here</a>
+</p>
+
+<p>
+Click <a href="https://www.linkedin.com/in/hustin-kava" rel="nofollow">here</a> to connect with me on LinkedIn.
 </p>
